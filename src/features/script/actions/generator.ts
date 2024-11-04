@@ -1,6 +1,9 @@
 "use server";
 
+import installerMap from "@/installers/bundle.json";
 import "server-only";
+
+const installers = new Map<string, string>(installerMap as [string, string][]);
 
 function getBanner() {
     return `  
@@ -25,6 +28,25 @@ export async function generateInstallScript(apps: string[]): Promise<string> {
     script += "    exit 1;\n";
     script += "fi\n\n";
 
+    script += `native_install() {\n`;
+    script += `    if command -v apt-get &> /dev/null; then\n`;
+    script += `        apt-get install -y $1;\n`;
+    script += `        return 0;\n`;
+    script += `    elif command -v dnf &> /dev/null; then\n`;
+    script += `        dnf install -y $1;\n`;
+    script += `        return 0;\n`;
+    script += `    elif command -v yum &> /dev/null; then\n`;
+    script += `        yum install -y $1;\n`;
+    script += `        return 0;\n`;
+    script += `    elif command -v pacman &> /dev/null; then\n`;
+    script += `        pacman -S --noconfirm $1;\n`;
+    script += `        return 0;\n`;
+    script += `    else\n`;
+    script += `        echo "$me: No supported package manager found to install: $1";\n`;
+    script += `        return 1;\n`;
+    script += `    fi\n`;
+    script += `}\n\n`;
+
     script += "cat <<EOF\n";
     script += getBanner();
     script += "\nEOF\n\n";
@@ -47,12 +69,16 @@ export async function generateInstallScript(apps: string[]): Promise<string> {
 }
 
 function getAppInstallCode(app: string): string | null {
-    switch (app) {
-        case "node":
-            return "curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs";
-        case "docker":
-            return "curl -fsSL https://get.docker.com | bash -";
-        default:
-            return null;
+    if (!installers.has(app)) {
+        let script = `echo "$me: No installer found for app: ${app}";\n`;
+        script += `echo "$me: Using native package manager to install: ${app}";\n`;
+        script += `native_install "${app}";\n`;
+        script += `if [ $? -ne 0 ]; then\n`;
+        script += `    echo "$me: Failed to install: ${app}";\n`;
+        script += `    exit 1;\n`;
+        script += `fi\n`;
+        return script;
     }
+
+    return installers.get(app) ?? null;
 }

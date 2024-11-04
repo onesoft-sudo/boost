@@ -10,7 +10,7 @@ export const topApps = [
         image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg",
     },
     {
-        id: "vscode",
+        id: "code",
         name: "Visual Studio Code",
         url: "https://code.visualstudio.com/",
         description:
