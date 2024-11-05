@@ -28,17 +28,47 @@ export async function generateInstallScript(apps: string[]): Promise<string> {
     script += "    exit 1;\n";
     script += "fi\n\n";
 
+    script += 'if [ -z "$(command -v wget)" ]; then\n';
+    script += "    native_install wget;\n";
+    script += "    if [ $? -ne 0 ]; then\n";
+    script += '        echo "$me: Failed to install wget";\n';
+    script += "        exit 1;\n";
+    script += "    fi\n";
+    script += "fi\n\n";
+
+    script += 'if [ -z "$(command -v gpg)" ]; then\n';
+    script += "    native_install gnupg gnupg2;\n";
+    script += "    if [ $? -ne 0 ]; then\n";
+    script += '        echo "$me: Failed to install gnupg";\n';
+    script += "        exit 1;\n";
+    script += "    fi\n";
+    script += "fi\n\n";
+
+    script += 'if [ -z "$(command -v gawk)" ]; then\n';
+    script += "    native_install gawk;\n";
+    script += "    if [ $? -ne 0 ]; then\n";
+    script += '        echo "$me: Failed to install gawk";\n';
+    script += "        exit 1;\n";
+    script += "    fi\n";
+    script += "fi\n\n";
+
     script += `native_install() {\n`;
-    script += `    if command -v apt-get &> /dev/null; then\n`;
+    script += `    rhel_pkg="$1";\n`;
+
+    script += `    if [ ! -z "$2" ]; then\n`;
+    script += `        rhel_pkg="$2";\n`;
+    script += `    fi\n`;
+
+    script += `    if command -v apt-get; then\n`;
     script += `        apt-get install -y $1;\n`;
     script += `        return 0;\n`;
-    script += `    elif command -v dnf &> /dev/null; then\n`;
-    script += `        dnf install -y $1;\n`;
+    script += `    elif command -v dnf; then\n`;
+    script += `        dnf install -y "$rhel_pkg";\n`;
     script += `        return 0;\n`;
-    script += `    elif command -v yum &> /dev/null; then\n`;
-    script += `        yum install -y $1;\n`;
+    script += `    elif command -v yum; then\n`;
+    script += `        yum install -y "$rhel_pkg";\n`;
     script += `        return 0;\n`;
-    script += `    elif command -v pacman &> /dev/null; then\n`;
+    script += `    elif command -v pacman; then\n`;
     script += `        pacman -S --noconfirm $1;\n`;
     script += `        return 0;\n`;
     script += `    else\n`;
@@ -58,7 +88,7 @@ export async function generateInstallScript(apps: string[]): Promise<string> {
         if (!code) {
             script += `echo "$me: Invalid app: ${app}";\n`;
         } else {
-            script += code;
+            script += code + "\n\n";
         }
     }
 

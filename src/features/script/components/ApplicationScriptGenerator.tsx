@@ -34,7 +34,7 @@ const ApplicationScriptGenerator: FC = () => {
     };
 
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2 flex-col lg:flex-row">
             <button
                 onClick={() => setApps([])}
                 className={

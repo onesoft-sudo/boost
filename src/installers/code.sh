@@ -8,7 +8,7 @@ code_install_install_apt() {
     rm -f /tmp/packages.microsoft.gpg
     apt install apt-transport-https
     apt update
-    apt install code
+    apt install -y code
 }
 
 code_install_import_yum() {
@@ -19,13 +19,13 @@ code_install_import_yum() {
 code_install_install_yum() {
     import_yum
     yum check-update
-    yum install code
+    yum install -y code
 }
 
 code_install_install_dnf() {
     import_yum
     dnf check-update
-    dnf install code
+    dnf install -y code
 }
 
 if [ -x "$(command -v apt-get)" ]; then

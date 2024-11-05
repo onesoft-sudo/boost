@@ -1,9 +1,11 @@
 "use client";
 
+import Brand from "@/components/Brand";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type FC } from "react";
+import { FaGithub } from "react-icons/fa6";
 
 const links = [
     { title: "Home", href: "/" },
@@ -20,14 +22,12 @@ const Navbar: FC = () => {
     const pathname = usePathname();
 
     return (
-        <nav className="grid items-center grid-cols-[1fr_10fr_1fr] gap-4 bg-neutral-800 py-2 px-5">
+        <nav className="flex justify-between lg:justify-normal lg:grid items-center grid-cols-[1fr_10fr_1fr] gap-4 bg-neutral-800/70 backdrop-blur-2xl py-2 px-5 sticky top-0 left-0 z-50">
             <Link href="/">
-                <span className="font-semibold text-2xl bg-gradient-to-tr from-blue-600 to-purple-500 bg-clip-text text-transparent">
-                    &gt;_ Boost
-                </span>
+                <Brand />
             </Link>
 
-            <ul className="flex items-center gap-5 justify-center">
+            <ul className="items-center gap-5 justify-center hidden lg:flex">
                 {links.map((link) => (
                     <li key={link.href}>
                         <Link
@@ -44,6 +44,14 @@ const Navbar: FC = () => {
                     </li>
                 ))}
             </ul>
+
+            <Link
+                href="https://github.com/onesoft-sudo/boost"
+                target="_blank"
+                className="lg:hidden"
+            >
+                <FaGithub size={20} />
+            </Link>
         </nav>
     );
 };
