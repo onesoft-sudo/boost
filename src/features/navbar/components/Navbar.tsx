@@ -45,6 +45,8 @@ const Navbar: FC = () => {
                 ))}
             </ul>
 
+            <div className="hidden lg:block">&nbsp;</div>
+
             <Link
                 href="https://github.com/onesoft-sudo/boost"
                 target="_blank"

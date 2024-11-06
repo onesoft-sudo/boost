@@ -9,7 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Boost | Set up your new Debian-based GNU/Linux machine in minutes",
+    title: {
+        default:
+            "Boost | Set up your new Debian-based GNU/Linux machine in minutes",
+        template: "%s | Boost",
+    },
     description:
         "Boost is a CLI tool to automatically install your favorite apps and tools on a new Debian-based GNU/Linux machine.",
 };

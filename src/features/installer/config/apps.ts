@@ -1,52 +1,58 @@
-import dockerLogo from "@/images/docker-mark-blue.svg";
+const firefox = {
+    id: "firefox",
+    name: "Mozilla Firefox",
+    url: "https://www.mozilla.org/en-US/firefox/new/",
+    description:
+        "A free and open-source web browser developed by the Mozilla Foundation.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg",
+    top: true,
+};
 
-export const topApps = [
-    {
-        id: "firefox",
-        name: "Mozilla Firefox",
-        url: "https://www.mozilla.org/en-US/firefox/new/",
-        description:
-            "A free and open-source web browser developed by the Mozilla Foundation.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg",
-    },
-    {
-        id: "code",
-        name: "Visual Studio Code",
-        url: "https://code.visualstudio.com/",
-        description:
-            "A free source-code editor made by Microsoft for Windows, Linux and macOS.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg",
-    },
-    {
-        id: "docker",
-        name: "Docker",
-        url: "https://www.docker.com/",
-        description:
-            "A set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.",
-        image: dockerLogo,
-    },
-    {
-        id: "spotify",
-        name: "Spotify",
-        url: "https://www.spotify.com/",
-        description:
-            "A digital music streaming service that gives you access to millions of songs.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
-    },
-    {
-        id: "discord",
-        name: "Discord",
-        url: "https://discord.com/",
-        description:
-            "A proprietary freeware VoIP application and digital distribution platform designed for video gaming communities.",
-        image: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/653714c1f22aef3b6921d63d_636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg",
-    },
-];
+const chrome = {
+    id: "chrome",
+    name: "Google Chrome",
+    url: "https://www.google.com/chrome/",
+    description: "A cross-platform web browser developed by Google.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg",
+    top: true,
+};
+
+const code = {
+    id: "code",
+    name: "Visual Studio Code",
+    url: "https://code.visualstudio.com/",
+    description:
+        "A free source-code editor made by Microsoft for Windows, Linux and macOS.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg",
+    top: true,
+};
 
 export const appsByCategory = {
-    "Developer Tools": [
+    "Web Browsers": [firefox, chrome],
+    "Social Media": [
         {
-            id: "gnu-gcc",
+            id: "discord",
+            name: "Discord",
+            url: "https://discord.com/",
+            description:
+                "A proprietary freeware VoIP application and digital distribution platform designed for video gaming communities.",
+            image: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/653714c1f22aef3b6921d63d_636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg",
+        },
+    ],
+    "Editors and IDEs": [
+        code,
+        {
+            id: "emacs",
+            name: "GNU Emacs",
+            url: "https://www.gnu.org/software/emacs/",
+            description:
+                "A customizable, self-documenting, real-time display editor.",
+            image: "https://upload.wikimedia.org/wikipedia/commons/0/08/EmacsIcon.svg",
+        },
+    ],
+    "Compilers & Runtime": [
+        {
+            id: "gcc",
             name: "GNU Compiler Collection",
             url: "https://gcc.gnu.org/",
             description:

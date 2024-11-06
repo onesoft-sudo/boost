@@ -38,7 +38,7 @@ const ApplicationScriptGenerator: FC = () => {
             <button
                 onClick={() => setApps([])}
                 className={
-                    "disabled:bg-red-800 disabled:cursor-not-allowed disabled:text-neutral-300 disabled:focus:ring-none disabled:hover:bg-red-800 hover:bg-red-700 bg-red-600 focus:ring-red-600 flex items-center gap-1 rounded text-white pl-1.5 pr-2.5 py-1 ml-4 uppercase focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 font-semibold text-sm"
+                    "disabled:bg-red-800 disabled:cursor-not-allowed disabled:text-neutral-400 disabled:focus:ring-none disabled:hover:bg-red-800 hover:bg-red-700 bg-red-600 focus:ring-red-600 flex items-center gap-1 rounded text-white pl-1.5 pr-2.5 py-1 ml-4 uppercase focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 font-semibold text-sm"
                 }
                 disabled={apps.length === 0}
             >
@@ -48,7 +48,7 @@ const ApplicationScriptGenerator: FC = () => {
             <button
                 onClick={handleDownload}
                 className={
-                    "disabled:bg-blue-800 disabled:cursor-not-allowed disabled:text-neutral-300 disabled:focus:ring-none disabled:hover:bg-blue-800 hover:bg-blue-700 bg-blue-600 focus:ring-blue-600 flex items-center gap-1 rounded text-white pl-1.5 pr-2.5 py-1 ml-4 uppercase focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 font-semibold text-sm"
+                    "disabled:bg-blue-800 disabled:cursor-not-allowed disabled:text-neutral-400 disabled:focus:ring-none disabled:hover:bg-blue-800 hover:bg-blue-700 bg-blue-600 focus:ring-blue-600 flex items-center gap-1 rounded text-white pl-1.5 pr-2.5 py-1 ml-4 uppercase focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 font-semibold text-sm"
                 }
                 disabled={apps.length === 0}
             >
